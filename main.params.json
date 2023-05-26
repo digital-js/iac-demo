@@ -18,10 +18,10 @@
       "value": true
     },
     "cosmosAccountName": {
-      "value": "ohc-cdb-dev-uks-cosmos"
+      "value": "djs-cdb-dev-uks-cosmos"
     },
     "cosmosDatabaseName": {
-      "value": "ohc"
+      "value": "djs"
     }
   }
 }
