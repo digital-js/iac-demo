@@ -34,7 +34,7 @@ jobs:
         resourceGroupName: ${{ env.ResourceGroupName }}
         template: ./main.bicep
         parameters: >
-          storageAccountName=githubactionstoreage
+          storageAccountName=githubactionarmstorage
           storageAccountType=Standard_LRS
           location=${{ env.ResourceGroupLocation }}
         failOnStdErr: false
