@@ -1,6 +1,8 @@
 param acrName string
 param acrSku string
 param acrAdminUser bool
+param cosmosAccountName string
+param cosmosDatabaseName string
 param storageAccountName string
 param storageAccountType string = 'Standard_LRS'
 param location string = resourceGroup().location
@@ -28,3 +30,12 @@ module acr './container-registry.bicep' = {
 }
 
 output acrLoginServer string = acr.outputs.acrLoginServer
+
+module cosmos './cosmos-db.bicep' = {
+  name: 'cosmosDeploy'
+  params: {
+    accountName: cosmosAccountName
+    databaseName: cosmosDatabaseName
+    location: location
+  }
+}
