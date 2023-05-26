@@ -72,7 +72,7 @@ resource account 'Microsoft.DocumentDB/databaseAccounts@2022-05-15' = {
     enableAutomaticFailover: systemManagedFailover
     capabilities: [
       {
-        name: 'Serverless'
+        name: 'EnableServerless'
       }
     ]
   }
