@@ -37,4 +37,7 @@ jobs:
           storageAccountName=githubactionarmstorage
           storageAccountType=Standard_LRS
           location=${{ env.ResourceGroupLocation }}
+          acrName=githubactionarmacr
+          acrSku=Basic
+          acrAdminUser=true
         failOnStdErr: false
