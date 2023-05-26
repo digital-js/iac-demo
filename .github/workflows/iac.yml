@@ -1,8 +1,11 @@
 name: AzureARMSample
 
 on:
-    [push]
-    workflow_dispatch:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: [main]
+  # Allow mannually trigger
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
