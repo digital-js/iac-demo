@@ -12,20 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ResourceGroupName: github-action-arm-rg
-      ResourceGroupLocation: "australiaeast"
+      ResourceGroupLocation: "uksouth"
     steps:
     - uses: actions/checkout@master
     - uses: azure/login@v1
       with:
         creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
-    - uses: Azure/CLI@v1
-      with:
-        inlineScript: |
-          #!/bin/bash
-          az group create --name ${{ env.ResourceGroupName }} --location ${{ env.ResourceGroupLocation }}
-          echo "Azure resource group created"
     - uses: azure/arm-deploy@v1
       with:
-        resourceGroupName: ${{ env.ResourceGroupName }}
-        template: ./azuredeploy.json
-        parameters: storageAccountType=Standard_LRS
+        template: ./01-resource-group.json
+        parameters: rgName=${{ env.ResourceGroupName }} rgLocation=${{ env.ResourceGroupLocation }}
