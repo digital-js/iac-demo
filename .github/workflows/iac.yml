@@ -27,9 +27,14 @@ jobs:
           #!/bin/bash
           az group create --name ${{ env.ResourceGroupName }} --location ${{ env.ResourceGroupLocation }}
           echo "Azure resource group created"
-    - uses: azure/arm-deploy@v1
-      name: deploy-templates
+    - name: deploy
+      uses: azure/arm-deploy@v1
       with:
-        resourceGroupName: ${{ env.ResourceGroupName }}
-        template: ./azuredeploy.json
-        parameters: azuredeploy.parameters.json location=${{ env.ResourceGroupLocation }}
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: ${{ secrets.AZURE_RG }}
+        template: ./main.bicep
+        parameters: |
+          storageAccountName=githubactionstoreage \
+          storageAccountType=Standard_LRS \
+          location=${{ env.ResourceGroupLocation }}
+        failOnStdErr: false
