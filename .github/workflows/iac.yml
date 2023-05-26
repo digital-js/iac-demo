@@ -33,8 +33,8 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ env.ResourceGroupName }}
         template: ./main.bicep
-        parameters: |
-          storageAccountName=githubactionstoreage \
-          storageAccountType=Standard_LRS \
+        parameters: >
+          storageAccountName=githubactionstoreage
+          storageAccountType=Standard_LRS
           location=${{ env.ResourceGroupLocation }}
         failOnStdErr: false
