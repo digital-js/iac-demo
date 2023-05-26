@@ -1,31 +1,32 @@
-@minLength(3)
-@maxLength(24)
-param storageAccountName string
-
+@description('Storage Account type')
 @allowed([
-  'Standard_LRS'
-  'Standard_GRS'
-  'Standard_RAGRS'
-  'Standard_ZRS'
   'Premium_LRS'
   'Premium_ZRS'
+  'Standard_GRS'
   'Standard_GZRS'
+  'Standard_LRS'
+  'Standard_RAGRS'
   'Standard_RAGZRS'
+  'Standard_ZRS'
 ])
 param storageAccountType string = 'Standard_LRS'
 
+@description('The storage account location.')
 param location string = resourceGroup().location
 
-resource stg 'Microsoft.Storage/storageAccounts@2022-09-01' = {
+@description('The name of the storage account')
+param storageAccountName string = 'store${uniqueString(resourceGroup().id)}'
+
+resource sa 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   name: storageAccountName
   location: location
   sku: {
     name: storageAccountType
   }
   kind: 'StorageV2'
-  properties: {
-    supportsHttpsTrafficOnly: true
-  }
+  properties: {}
 }
 
-output storageEndpoint object = stg.properties.primaryEndpoints
+output storageAccountName string = storageAccountName
+output storageAccountId string = sa.id
+output storeageAccountEndpoints object = sa.properties.primaryEndpoints

@@ -11,4 +11,5 @@ module stg './storage-account.bicep' = {
   }
 }
 
-output storageEndpoint object =  stg.outputs.storageEndpoint
+output storageAccountId string =  stg.outputs.storageAccountId
+output storageAccountEndpoints object =  stg.outputs.storeageAccountEndpoints
