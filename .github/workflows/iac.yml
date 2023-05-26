@@ -28,8 +28,8 @@ jobs:
           az group create --name ${{ env.ResourceGroupName }} --location ${{ env.ResourceGroupLocation }}
           echo "Azure resource group created"
     - uses: azure/arm-deploy@v1
-      name: create-storage-account
+      name: deploy-templates
       with:
         resourceGroupName: ${{ env.ResourceGroupName }}
-        template: ./storage-account.json
-        parameters: storageAccountType=Standard_LRS storageAccountName=githubactionarmstorage location=${{ env.ResourceGroupLocation }}
+        template: ./azuredeploy.json
+        parameters: azuredeploy.parameters.json location=${{ env.ResourceGroupLocation }}
