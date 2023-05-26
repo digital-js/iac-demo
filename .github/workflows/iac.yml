@@ -1,5 +1,8 @@
-on: [push]
 name: AzureARMSample
+
+on:
+    [push]
+    workflow_dispatch:
 
 jobs:
   build-and-deploy:
