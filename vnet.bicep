@@ -20,20 +20,6 @@ resource vnet 'Microsoft.Network/virtualNetworks@2022-07-01' = {
         options.addressPrefix
       ]
     }
-    subnets: [
-      {
-        name: options.subnets[0].name
-        properties: {
-          addressPrefix: options.subnets[0].addressPrefix
-        }
-      }
-      {
-        name: options.subnets[1].name
-        properties: {
-          addressPrefix: options.subnets[1].addressPrefix
-        }
-      }
-    ]
   }
 }
 
