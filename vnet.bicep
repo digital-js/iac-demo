@@ -28,7 +28,7 @@ resource subnets 'Microsoft.Network/virtualNetworks/subnets@2020-11-01' = [for (
   name: sn.name
   parent: vnet
   properties: {
-    addressPrefix: sn.subnetPrefix
+    addressPrefix: sn.addressPrefix
   }
 }]
 
