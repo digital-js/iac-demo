@@ -37,4 +37,13 @@ resource vnet 'Microsoft.Network/virtualNetworks@2022-07-01' = {
   }
 }
 
+@batchSize(1)
+resource subnets 'Microsoft.Network/virtualNetworks/subnets@2020-11-01' = [for (sn, index) in options.subnets: {
+  name: sn.name
+  parent: vnet
+  properties: {
+    addressPrefix: sn.subnetPrefix
+  }
+}]
+
 output vnet object = vnet

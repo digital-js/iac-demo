@@ -26,7 +26,13 @@
     "vnetOptions": {
       "value": {
         "name": "djs-cdb-dev-uks-vnet",
-        "addressPrefix": "10.0.0.0/22"
+        "addressPrefix": "10.0.0.0/16",
+        "subnets": [
+          {
+            "name": "web",
+            "addressPrefix": "10.0.0./24"
+          }
+        ]
       }
     }
   }
