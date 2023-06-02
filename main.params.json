@@ -28,22 +28,6 @@
     },
     "vnetAddressPrefix": {
       "value": "10.0.0.0/16"
-    },
-    "subnets": {
-      "value": [
-        {
-          "name": "web",
-          "addressprefix": "10.144.0.0/24"
-        },
-        {
-          "name": "api",
-          "addressprefix": "10.144.1.0/24"
-        },
-        {
-          "name": "data",
-          "addressprefix": "10.144.2.0/24"
-        }
-      ]
     }
   }
 }
