@@ -31,6 +31,10 @@
           {
             "name": "web",
             "addressPrefix": "10.0.0.0/24"
+          },
+          {
+            "name": "api",
+            "addressPrefix": "10.0.1.0/24"
           }
         ]
       }
