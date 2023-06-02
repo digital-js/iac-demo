@@ -4,19 +4,19 @@ param acrAdminUser bool
 param cosmosAccountName string
 param cosmosDatabaseName string
 param storageAccountName string
-param vnetName string
-param vnetAddressPrefix string
+param vnetOptions object
 param storageAccountSku string = 'Standard_LRS'
 param location string = resourceGroup().location
 
 module vnet './vnet.bicep' = {
   name: 'vnetDeploy'
   params: {
-    vnetName: vnetName
-    vnetAddressPrefix: vnetAddressPrefix
+    options: vnetOptions
     location: location
   }
 }
+
+output vnet object = vnet.outputs.vnet
 
 module stg './storage-account.bicep' = {
   name: 'storageDeploy'

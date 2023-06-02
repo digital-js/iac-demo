@@ -23,8 +23,10 @@
     "cosmosDatabaseName": {
       "value": "djs"
     },
-    "vnetName": {
-      "value": "github-action-arm-uksouth-vnet"
+    "vnetOtions": {
+      "value": {
+        "name": "djs-cdb-dev-uks-vnet"
+      }
     },
     "vnetAddressPrefix": {
       "value": "10.0.0.0/16"
