@@ -25,11 +25,9 @@
     },
     "vnetOptions": {
       "value": {
-        "name": "djs-cdb-dev-uks-vnet"
+        "name": "djs-cdb-dev-uks-vnet",
+        "addressPrefix": "10.0.0.0/22"
       }
-    },
-    "vnetAddressPrefix": {
-      "value": "10.0.0.0/16"
     }
   }
 }

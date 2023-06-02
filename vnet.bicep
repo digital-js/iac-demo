@@ -1,11 +1,6 @@
 param options object = {
   name: 'VNet1'
-  addressPrefixes: [
-    {
-      name: 'firstPrefix'
-      addressPrefix: '10.0.0.0/22'
-    }
-  ]
+  addressPrefix: '10.0.0.0/22'
   subnets: [
     {
       name: 'firstSubnet'
@@ -22,7 +17,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2022-07-01' = {
   properties: {
     addressSpace: {
       addressPrefixes: [
-        options.addressPrefixes[0].addressPrefix
+        options.addressPrefix
       ]
     }
     subnets: [
