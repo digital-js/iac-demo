@@ -23,7 +23,7 @@
     "cosmosDatabaseName": {
       "value": "djs"
     },
-    "vnetOtions": {
+    "vnetOptions": {
       "value": {
         "name": "djs-cdb-dev-uks-vnet"
       }
