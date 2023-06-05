@@ -55,7 +55,6 @@ module cosmos './cosmos-db.bicep' = {
 module containerApp './container-app.bicep' = {
   name: 'containerAppDeploy'
   params: {
-    options: containerAppOptions
     location: location
   }
 }
