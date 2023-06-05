@@ -50,7 +50,7 @@
         "logAnalyticsName": "container-app-logspace",
         "vnetName": "container-app-vnet",
         "vnetAddressPrefix": "10.5.0.0/16",
-        "envSubnetName": "Subnet1",
+        "envSubnetName": "container-app-env-subnet",
         "envSubnetPrefix": "10.6.0.0/23",
         "imageName": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
         "targetPort": 80
