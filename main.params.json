@@ -42,6 +42,19 @@
           }
         ]
       }
+    },
+    "containerAppOptions": {
+      "value": {
+        "name": "test-container-app",
+        "envName": "test-container-app-env",
+        "logAnalyticsName": "container-app-logspace",
+        "vnetName": "container-app-vnet",
+        "vnetAddressPrefix": "10.5.0.0/16",
+        "envSubnetName": "Subnet1",
+        "envSubnetPrefix": "10.6.0.0/23",
+        "imageName": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
+        "targetPort": 80
+      }
     }
   }
 }

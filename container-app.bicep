@@ -1,32 +1,17 @@
-@description('Specifies the name of the container app.')
-param containerAppName string = 'app-${uniqueString(resourceGroup().id)}'
-
-@description('Specifies the name of the container app environment.')
-param containerAppEnvName string = 'env-${uniqueString(resourceGroup().id)}'
-
-@description('Specifies the name of the log analytics workspace.')
-param containerAppLogAnalyticsName string = 'log-${uniqueString(resourceGroup().id)}'
-
-@description('Specifies the name of the virtual network.')
-param virtualNetworkName string = 'vnet-${uniqueString(resourceGroup().id)}'
-
-@description('Address prefix')
-param vnetAddressPrefix string = '10.0.0.0/16'
-
-@description('Container App environment subnet name')
-param containerAppEnvSubnetName string = 'Subnet1'
-
-@description('Container App environment subnet prefix')
-param containerAppEnvSubnetPrefix string = '10.0.0.0/23'
+param options object = {
+  name: 'app-${uniqueString(resourceGroup().id)}'
+  envName: 'env-${uniqueString(resourceGroup().id)}'
+  logAnalyticsName: 'log-${uniqueString(resourceGroup().id)}'
+  vnetName: 'vnet-${uniqueString(resourceGroup().id)}'
+  vnetAddressPrefix: '10.0.0.0/16'
+  envSubnetName: 'Subnet1'
+  envSubnetPrefix: '10.0.0.0/23'
+  imageName: 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
+  targetPort: 80
+}
 
 @description('Specifies the location for all resources.')
 param location string = resourceGroup().location
-
-@description('Specifies the docker container image to deploy.')
-param containerImage string = 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
-
-@description('Specifies the container port.')
-param targetPort int = 80
 
 @description('Number of CPU cores the container can use. Can be with a maximum of two decimals.')
 @allowed([
@@ -64,7 +49,7 @@ param minReplicas int = 1
 param maxReplicas int = 3
 
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
-  name: containerAppLogAnalyticsName
+  name: options.logAnalyticsName
   location: location
   properties: {
     sku: {
@@ -74,19 +59,19 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 }
 
 resource vnet 'Microsoft.Network/virtualNetworks@2022-07-01' = {
-  name: virtualNetworkName
+  name: options.vnetName
   location: location
   properties: {
     addressSpace: {
       addressPrefixes: [
-        vnetAddressPrefix
+        options.vnetAddressPrefix
       ]
     }
     subnets: [
       {
-        name: containerAppEnvSubnetName
+        name: options.envSubnetName
         properties: {
-          addressPrefix: containerAppEnvSubnetPrefix
+          addressPrefix: options.envSubnetPrefix
         }
       }
     ]
@@ -94,7 +79,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2022-07-01' = {
 }
 
 resource containerAppEnv 'Microsoft.App/managedEnvironments@2022-03-01' = {
-  name: containerAppEnvName
+  name: options.envName
   location: location
   properties: {
     appLogsConfiguration: {
@@ -111,14 +96,14 @@ resource containerAppEnv 'Microsoft.App/managedEnvironments@2022-03-01' = {
 }
 
 resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
-  name: containerAppName
+  name: options.name
   location: location
   properties: {
     managedEnvironmentId: containerAppEnv.id
     configuration: {
       ingress: {
         external: true
-        targetPort: targetPort
+        targetPort: options.targetPort
         allowInsecure: false
         traffic: [
           {
@@ -132,8 +117,8 @@ resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
       revisionSuffix: 'firstrevision'
       containers: [
         {
-          name: containerAppName
-          image: containerImage
+          name: options.name
+          image: options.imageName
           resources: {
             cpu: json(cpuCore)
             memory: '${memorySize}Gi'

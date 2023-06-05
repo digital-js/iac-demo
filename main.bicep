@@ -5,6 +5,7 @@ param cosmosAccountName string
 param cosmosDatabaseName string
 param storageAccountName string
 param vnetOptions object
+param containerAppOptions object
 param storageAccountSku string = 'Standard_LRS'
 param location string = resourceGroup().location
 
@@ -47,6 +48,14 @@ module cosmos './cosmos-db.bicep' = {
   params: {
     accountName: cosmosAccountName
     databaseName: cosmosDatabaseName
+    location: location
+  }
+}
+
+module containerApp './container-app.bicep' = {
+  name: 'containerAppDeploy'
+  params: {
+    options: containerAppOptions
     location: location
   }
 }
