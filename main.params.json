@@ -48,7 +48,7 @@
         "name": "test-container-app",
         "envName": "test-container-app-env",
         "logAnalyticsName": "container-app-logspace",
-        "vnetName": "container-app-vnet",
+        "vnetName": "djs-cna-dev-uks-vnet",
         "vnetAddressPrefix": "10.5.0.0/16",
         "envSubnetName": "container-app-env-subnet",
         "envSubnetPrefix": "10.6.0.0/23",
